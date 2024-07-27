@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package order_service;
+
+option go_package = "./proto;proto";
+
+service OrderService {
+    rpc CompletePayment (PaymentCompleteRequest) returns (PaymentCompleteResponse);
+}
+
+message PaymentCompleteRequest {
+    string order_id = 1; 
+}
+
+message PaymentCompleteResponse {
+   bool status = 1;
+}

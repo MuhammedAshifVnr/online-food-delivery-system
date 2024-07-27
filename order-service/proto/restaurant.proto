@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package restaurant;
+
+option go_package="./proto;proto";
+
+service RestaurantService {   
+    rpc GetMenuItem(GetMenuItemRequest) returns (MenuItemResponse);
+}
+
+
+message GetMenuItemRequest {
+    uint32 id = 1;
+}
+
+message MenuItemResponse {
+    uint32 id = 1;
+    uint32 restaurant_id = 2;
+    string name = 3;
+    string description = 4;
+    string status =5 ;
+    float price = 6;
+}
+
+

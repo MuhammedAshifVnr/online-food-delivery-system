@@ -1,0 +1,17 @@
+syntax="proto3";
+
+package user;
+
+option go_package = "./proto;proto";
+
+service UserService{
+    rpc GetUserDetails (GetUserDetailsRequest) returns (UserResponse); 
+}
+
+message GetUserDetailsRequest {
+    uint32 id = 1;
+}
+
+message UserResponse {
+    bool exists = 1;
+}
