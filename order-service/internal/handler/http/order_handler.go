@@ -23,11 +23,11 @@ func RegisterOrderRoutes(router *gin.Engine, orderService *service.OrderService)
 	orderGroup := router.Group("/orders")
 	orderGroup.Use(middleware.AuthMiddleware())
 	{
-		orderGroup.POST("", handler.PlaceOrder)
+		orderGroup.POST("/place", handler.PlaceOrder)
 		orderGroup.PUT("/:id/status", handler.UpdateOrderStatus)
 		orderGroup.GET("/:id", handler.GetOrderDetails)
 		orderGroup.GET("/history", handler.GetOrderHistory)
-		orderGroup.GET("", handler.GetAllOrders)
+		orderGroup.GET("/all", handler.GetAllOrders)
 	}
 }
 

@@ -33,6 +33,7 @@ func (p *paymentRepository) PaymentConfirmation(c *gin.Context) (string, string)
 	var paymentStore model.PaymentDetails
 	var pd = make(map[string]string)
 	if err := c.BindJSON(&pd); err != nil {
+		fmt.Println("err====",err)
 		log.Fatal("failed to fetch payment data")
 	}
 	fmt.Println("sig - ", pd["razorpay_signature"], pd["razorpay_order_id"], pd["razorpay_payment_id"])

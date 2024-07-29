@@ -17,21 +17,21 @@ import (
 func main() {
 	database.Init()
 
-	userConn, err := grpc.Dial("localhost:9090", grpc.WithInsecure())
+	userConn, err := grpc.Dial("user-service:9090", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("failed to connect to user service: %v", err)
 	}
 	defer userConn.Close()
 	userClient := proto.NewUserServiceClient(userConn)
 
-	restaurantConn, err := grpc.Dial("localhost:9091", grpc.WithInsecure())
+	restaurantConn, err := grpc.Dial("restaurant-service:9091", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("failed to connect to restaurant service: %v", err)
 	}
 	defer restaurantConn.Close()
 	restClient := proto.NewRestaurantServiceClient(restaurantConn)
 
-	payConn, err := grpc.Dial("localhost:9093", grpc.WithInsecure())
+	payConn, err := grpc.Dial("payment-service:9093", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("failed to connect to restaurant service: %v", err)
 	}

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net"
 
@@ -12,18 +11,13 @@ import (
 	"github.com/MuhammedAshifVnr/online-food-delivery-system/payment-service/pkg/database"
 	"github.com/MuhammedAshifVnr/online-food-delivery-system/payment-service/proto"
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 	"google.golang.org/grpc"
 )
 
 func main() {
 	database.Init()
-	err := godotenv.Load("./cmd/.env")
-	if err != nil {
-		fmt.Println("Error to load env..............")
-	}
 
-	orderConn, err := grpc.Dial("localhost:9092", grpc.WithInsecure())
+	orderConn, err := grpc.Dial("order-service:9092", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("failed to connect to restaurant service: %v", err)
 	}
@@ -35,7 +29,7 @@ func main() {
 	handler := http.NewPaymentHandler(service)
 
 	router := gin.Default()
-	router.LoadHTMLGlob("./pkg/temp/*")
+	router.LoadHTMLGlob("/root/pkg/temp/*.html")
 	handler.RegisterRoutes(router)
 
 	go func() {
